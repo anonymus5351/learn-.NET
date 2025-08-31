@@ -1,0 +1,30 @@
+class parent
+{
+	public void print()
+	{
+		System.Console.WriteLine(" from parent");
+	}
+}
+class child : parent
+{
+	public new void print()
+	{
+		System.Console.WriteLine("from child");
+
+	}
+}
+class program
+{
+	public static void Main()
+	{
+		parent p=new parent();
+		child c=new child();
+		p.print();
+		c.print();
+	}
+}
+/* this is the output
+from parent
+from child
+from parent
+*/
