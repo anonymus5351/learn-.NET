@@ -1,0 +1,197 @@
+interface Iterator
+{
+	bool hasnext();
+	int next();
+}
+class stack:Iterator
+{
+	private int []s;
+	int i;
+	public stack(int val)
+	{
+		s=new int[val];
+	}
+	public void push(int value)
+	{
+			s[i]=value;
+			i++;
+	}	
+	public int pop()
+	{
+		return s[i--];
+	}
+		
+	public bool hasnext()
+	{
+		return i>0;
+	}
+	public int next()
+	{
+		if(!hasnext())
+		{
+			return 0;
+		}
+		else
+		{
+			return s[--i];
+		}
+			
+	}
+}
+class queue:Iterator
+{
+	private int []q;
+	
+	int front = 0;
+	int rear=0;
+	public queue(int size)
+	{
+		q=new int[size];
+	}
+	public void enqueue(int val)
+	{
+		q[rear]=val;
+		rear++;
+		
+	}
+	
+	public int dequeue()
+	{
+		return q[front++];
+	}
+	
+		
+		
+	public bool hasnext()
+	{
+		return front<rear;
+	}
+	public int next()
+	{
+		if(front>=rear)
+		{
+			return -1;
+		}
+		else
+		{
+			return q[front++];
+		}
+	}
+
+	
+}	
+class linkedlist:Iterator
+{
+	private class node
+	{
+		public int data;
+		public node next;
+		
+		public node(int val)
+		
+		{
+			data =val;
+			next =null;
+		}
+	}
+	
+	private node first, last;
+	public linkedlist()
+	{
+		first=null;
+		last=null;
+
+	}
+	
+	public void insert(int val)
+	{
+		node newnode=new node(val);
+		if(first ==null)
+		{
+			first=last=newnode;
+		}
+		else
+		{
+			last.next=newnode;
+			last=newnode;
+		}
+	}
+	public int delete()
+	{
+		if(first == null)
+		{
+			System.Console.WriteLine("empty");
+			return -1;
+		}
+		else
+		{
+			int val = first.data;
+			first = first.next;
+			return val;
+		}
+	}
+		public bool hasnext()
+	{
+		return first!=null;
+	}
+	public int next()
+	{
+		if(first==null)
+		{
+			return -1;
+		}
+		int val = first.data;
+		first=first.next;
+		return val;
+	}
+
+}
+
+
+class program
+{
+	public static void Main()
+	{
+		Iterator itr;
+		stack s=new stack(5);
+		s.push(100);
+		s.push(200);
+		s.push(300);
+		s.push(400);
+		s.push(500);
+		itr=s;
+		while(itr.hasnext())
+		{
+			System.Console.WriteLine(itr.next());
+		}
+
+
+		queue q=new queue(5);
+		q.enqueue(10);
+		q.enqueue(20);
+		q.enqueue(30);
+		q.enqueue(40);
+		q.enqueue(50);
+		
+		itr=q;
+		while(itr.hasnext())
+		{
+			System.Console.WriteLine(itr.next());
+		}
+
+		linkedlist l=new linkedlist();
+		l.insert(10);
+		l.insert(20);
+		l.insert(35);
+		l.insert(45);
+		l.insert(55);
+		itr=l;
+		while(itr.hasnext())
+		{
+			System.Console.WriteLine(itr.next());
+		}
+	}
+}
+		
+
+
